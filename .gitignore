@@ -1,0 +1,7 @@
+*.exe
+venv/
+__pycache__/
+go-service/main
+.DS_Store
+.vscode/
+.idea/
