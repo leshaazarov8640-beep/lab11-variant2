@@ -1,12 +1,11 @@
-# Stage 1: Компиляция
-FROM golang:1.21-alpine AS builder
+# Stage 1: Build
+FROM golang:1.23-alpine AS builder
 WORKDIR /app
-COPY go.mod go.sum ./
-RUN go mod download
 COPY . .
+RUN go mod tidy && go mod download
 RUN go build -o main .
 
-# Stage 2: Запуск
+# Stage 2: Final image
 FROM alpine:latest
 WORKDIR /root/
 COPY --from=builder /app/main .
